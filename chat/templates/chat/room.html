@@ -14,6 +14,9 @@
         document.getElementById('room-name').textContent,
       );
 
+      console.log(roomName);
+      console.log(window.location.host);
+
       const chatSocket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat/' + roomName + '/',
       );
@@ -41,6 +44,7 @@
         chatSocket.send(
           JSON.stringify({
             message: message,
+            command: 'new_message',
           }),
         );
         messageInputDom.value = '';

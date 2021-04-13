@@ -67,7 +67,7 @@
               class="online"
               alt=""
             />
-            <p>Mike Ross</p>
+            <p id="full_name"></p>
             <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
             <div id="status-options">
               <ul>
@@ -206,6 +206,10 @@
       // );
       const roomName = {{ room_name_json }};
       const username = {{ username }};
+      const firstName = {{ first_name }};
+      const lastName = {{ last_name }};
+
+      document.querySelector('#full_name').innerHTML = `${firstName} ${lastName}`;
 
       const chatSocket = new ReconnectingWebSocket(
         'ws://' + window.location.host + '/ws/chat/' + roomName + '/',
@@ -217,8 +221,8 @@
 
       chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
-
         if (data['command'] === 'messages'){
+          clearMessages();
           data['messages'].forEach(msg => {
             createMessage(msg);
           });
@@ -247,6 +251,7 @@
           JSON.stringify({
             message: message,
             command: 'new_message',
+            room: roomName,
             from: username,
           }),
         );
@@ -255,7 +260,8 @@
 
       function fetchMessages() {
         chatSocket.send(JSON.stringify({
-          command: 'fetch_messages'
+          command: 'fetch_messages',
+          room: roomName
         }))
       }
 
@@ -274,6 +280,10 @@
         msgListTag.appendChild(imgTag);
         msgListTag.appendChild(pTag);
         document.querySelector('#chat-log').appendChild(msgListTag);
+      }
+
+      function clearMessages() {
+        document.querySelector('#chat-log').innerHTML = '';
       }
     </script>
   </body>

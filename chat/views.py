@@ -5,7 +5,7 @@ import json
 
 # Create your views here.
 
-def index(request):
+def chat(request):
     return render(request, 'chat/index.html')
 
 @login_required

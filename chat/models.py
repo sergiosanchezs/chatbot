@@ -16,3 +16,8 @@ class Message(models.Model):
   @staticmethod
   def last_10_messages(room_name):
     return Message.objects.filter(room=room_name).order_by('timestamp').all()[:10]
+
+
+# class Rooms(models.Model):
+#   name = models.TextField()
+#   author

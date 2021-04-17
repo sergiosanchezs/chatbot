@@ -1,0 +1,42 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  color: #bee7e8;
+  font-size: 18px;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #726da8;
+}
+
+input,
+h1 {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+h1 {
+  font-size: 2.25rem;
+}
+
+input {
+  max-width: 20rem;
+  color: #594157;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+input[type='button'] {
+  font-size: 1.5rem;
+}
+
+p {
+  margin: 0.5rem;
+}

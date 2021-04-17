@@ -68,8 +68,8 @@
               alt=""
             />
             <p id="full_name"></p>
-            <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
-            <div id="status-options">
+            <!-- <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i> -->
+            <!-- <div id="status-options">
               <ul>
                 <li id="status-online" class="active">
                   <span class="status-circle"></span>
@@ -88,8 +88,8 @@
                   <p>Offline</p>
                 </li>
               </ul>
-            </div>
-            <div id="expanded">
+            </div> -->
+            <!-- <div id="expanded">
               <label for="twitter"
                 ><i class="fa fa-facebook fa-fw" aria-hidden="true"></i
               ></label>
@@ -102,14 +102,16 @@
                 ><i class="fa fa-instagram fa-fw" aria-hidden="true"></i
               ></label>
               <input name="twitter" type="text" value="mike.ross" />
-            </div>
+            </div> -->
           </div>
         </div>
-        <div id="search">
+
+        <!-- <div id="search">
           <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
           <input type="text" placeholder="Search contacts..." />
-        </div>
-        <div id="contacts">
+        </div> -->
+
+        <!-- <div id="contacts">
           <ul>
             <li class="contact">
               <div class="wrap">
@@ -139,8 +141,8 @@
               </div>
             </li>
           </ul>
-        </div>
-        <div id="bottom-bar">
+        </div> -->
+        <!-- <div id="bottom-bar">
           <button id="addcontact">
             <i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>
             <span>Add contact</span>
@@ -149,12 +151,12 @@
             <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
             <span>Settings</span>
           </button>
-        </div>
+        </div> -->
       </div>
       <div class="content">
         <div class="contact-profile">
-          <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-          <p>{{ username }}</p>
+          <!-- <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" /> -->
+          <p id="chat_room_name">&nbsp;</p>
           <!-- <div class="social-media">
             <i class="fa fa-facebook" aria-hidden="true"></i>
             <i class="fa fa-twitter" aria-hidden="true"></i>
@@ -210,6 +212,7 @@
       const lastName = {{ last_name }};
 
       document.querySelector('#full_name').innerHTML = `${firstName} ${lastName}`;
+      document.querySelector('#chat_room_name').innerHTML = `Chat Room Name: ${roomName}`;
 
       const chatSocket = new ReconnectingWebSocket(
         'ws://' + window.location.host + '/ws/chat/' + roomName + '/',
@@ -247,15 +250,17 @@
       document.querySelector('#chat-message-submit').onclick = function (e) {
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
-        chatSocket.send(
-          JSON.stringify({
-            message: message,
-            command: 'new_message',
-            room: roomName,
-            from: username,
-          }),
-        );
-        messageInputDom.value = '';
+        if (message !== ''){
+          chatSocket.send(
+            JSON.stringify({
+              message: message,
+              command: 'new_message',
+              room: roomName,
+              from: username,
+            }),
+          );
+          messageInputDom.value = '';
+        }
       };
 
       function fetchMessages() {

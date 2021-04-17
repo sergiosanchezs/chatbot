@@ -1,14 +1,24 @@
 <!-- chat/templates/chat/index.html -->
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'styles-index.css' %}" />
     <title>Chat Rooms</title>
   </head>
   <body>
-    What chat room would you like to enter?<br />
-    <input id="room-name-input" type="text" size="100" /><br />
-    <input id="room-name-submit" type="button" value="Enter" />
+    <div class="container">
+      <h1>What chat room would you like to enter?</h1>
+      <input id="room-name-input" type="text" size="100" />
+      <input id="room-name-submit" type="button" value="Go to Room" />
+      <p>Note: You need to login first, and then go to the chat page.</p>
+      <p>
+        You can login on the following link: <a href="/admin/">Login Page</a>
+      </p>
+    </div>
 
     <script>
       document.querySelector('#room-name-input').focus();
